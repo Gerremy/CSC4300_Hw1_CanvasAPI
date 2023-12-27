@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HTML Canvas Primitives</title>
+
+<script>
+    var canvas;         /* DOM object corresponding to the canvas */
+    var graphics;       /* 2D graphics context for drawing on the canvas */
+    var gridSize = 20;  /* size of a grid cell, should divide canvas width and height */
+
+    // Draw a line of given width and color from (x1, y1) to (x2, y2) 
+    function drawLine(x1, y1, x2, y2, width, color)
+    {
+        // this begins our line
+        graphics.beginPath();
+
+        // TODO: use moveTo (1st point) and lineTo (2nd point)
+
+        graphics.moveTo(x1, y1);
+        graphics.lineTo(x2, y2);
+
+        // TODO: set lineWidth and strokeStyle
+
+        graphics.lineWidth = width;
+        graphics.strokeStyle = color;
+
+        // this is what actually draws the line
+        graphics.stroke();
+    }
+
+    // Draw a grid on top of the canvas, with each cell of size gridSize (global variable)
+    function drawGrid()
+    {
+        // TODO; write a for loop that draws the horizontal grid lines (using drawLine)
+        // (increment y by gridSize, from 0 to canvas.height)
+
+        for (var y = 0; y <= canvas.height; y = y + gridSize) {
+            drawLine(0, y, 400, y, 1, "lightgrey");
+        }
+
+        // TODO; write a for loop that draws the vertical grid lines (using drawLine)
+        // (increment x by gridSize, from 0 to canvas.width)
+        for (var x = 0; x <= canvas.width; x = x + gridSize) {
+            drawLine(x, 0, x, 400, 1, "lightgrey");
+        }
+
+        // TODO: draw two lines that divide the canvas into four regions
+        drawLine(0, 200, 400, 200, 2, "darkgrey");
+        drawLine(200, 0, 200, 400, 2, "darkgrey");
+    }
+    
+    // Draw a Villanova logo in the first canvas region
+    function drawVillanovaLogo()
+    {
+        // this begins our shape
+        graphics.beginPath();
+
+        // TODO: call moveTo (1st point)
+
+        graphics.moveTo(gridSize, 2*gridSize);
+
+        // TODO: call lineTo (next point) six? times
+
+        graphics.lineTo(4*gridSize, 8*gridSize);
+        graphics.lineTo(6*gridSize, 8*gridSize);
+        graphics.lineTo(9*gridSize, 2*gridSize);
+        graphics.lineTo(7*gridSize, 2*gridSize);
+        graphics.lineTo(5*gridSize, 6*gridSize);
+        graphics.lineTo(3*gridSize, 2*gridSize);
+
+        // this joins the last and first point
+        graphics.closePath();
+
+        // TO DO: set the fillStyle and strokeStyle
+        graphics.lineWidth = 2;
+        graphics.fillStyle = "white"
+        graphics.strokeStyle = "blue"
+
+        // this is what fills the interior
+        graphics.fill();
+
+        // this is what draws the outline
+        graphics.stroke();
+    }
+
+    function drawTomHollandSpidermanLogo()
+    {
+        // this begins our shape
+        graphics.beginPath();
+
+        // TODO: call moveTo (1st point)
+
+        graphics.moveTo(11*gridSize, 1*gridSize);
+
+        // TODO: call lineTo (next points)
+
+        graphics.lineTo(11*gridSize, 3*gridSize);
+        graphics.lineTo(12.5*gridSize, 4*gridSize);
+        graphics.lineTo(11*gridSize, 5*gridSize);
+        graphics.lineTo(11*gridSize, 9*gridSize);
+
+        graphics.lineWidth = 2;
+
+        graphics.strokeStyle = "black"
+
+        graphics.stroke();
+
+        //---------------------------------------------
+        
+        graphics.beginPath();
+
+        graphics.moveTo(12*gridSize, 2*gridSize);
+
+        graphics.lineTo(12*gridSize, 3*gridSize);
+        graphics.lineTo(13.5*gridSize, 4*gridSize);
+        graphics.lineTo(12*gridSize, 5*gridSize);
+        graphics.lineTo(12*gridSize, 8*gridSize);
+
+        graphics.lineWidth = 2;
+
+        graphics.strokeStyle = "black"
+
+        graphics.stroke();
+
+        //---------------------------------------------
+        
+        graphics.beginPath();
+
+        graphics.moveTo(14*gridSize, 3*gridSize);
+
+        graphics.lineTo(15*gridSize, 2.5*gridSize);
+        graphics.lineTo(16*gridSize, 3*gridSize);
+        graphics.lineTo(16*gridSize, 5*gridSize);
+        graphics.lineTo(15*gridSize, 5.5*gridSize);
+        graphics.lineTo(14*gridSize, 5*gridSize);
+        graphics.closePath();
+
+        graphics.lineWidth = 2;
+        graphics.fillStyle = "black"
+        graphics.strokeStyle = "black"
+
+        graphics.fill();
+        graphics.stroke();
+        
+        //---------------------------------------------
+
+        graphics.beginPath();
+
+        graphics.moveTo(18*gridSize, 2*gridSize);
+
+        graphics.lineTo(18*gridSize, 3*gridSize);
+        graphics.lineTo(16.5*gridSize, 4*gridSize);
+        graphics.lineTo(18*gridSize, 5*gridSize);
+        graphics.lineTo(18*gridSize, 8*gridSize);
+
+        graphics.lineWidth = 2;
+
+        graphics.strokeStyle = "black"
+
+        graphics.stroke();
+        
+        //---------------------------------------------
+
+        graphics.beginPath();
+
+        graphics.moveTo(19*gridSize, 1*gridSize);
+
+        graphics.lineTo(19*gridSize, 3*gridSize);
+        graphics.lineTo(17.5*gridSize, 4*gridSize);
+        graphics.lineTo(19*gridSize, 5*gridSize);
+        graphics.lineTo(19*gridSize, 9*gridSize);
+
+        graphics.lineWidth = 2;
+
+        graphics.strokeStyle = "black"
+
+        graphics.stroke();
+    }
+
+    function drawSmileyFace()
+    {
+        graphics.beginPath();
+
+        //centerX, centerY, radius, beginAngle, endAngle
+        graphics.arc(3*gridSize, 12*gridSize, gridSize, 0, Math.PI*2);
+
+        graphics.fillStyle = "lightgreen";
+
+        graphics.closePath();
+
+        graphics.fill();
+
+        //--------------------------------------------------------------
+
+        graphics.beginPath();
+
+        //centerX, centerY, radius, beginAngle, endAngle
+        graphics.arc(7*gridSize, 12*gridSize, gridSize, 0, Math.PI*2);
+
+        graphics.fillStyle = "lightgreen";
+
+        graphics.closePath();
+
+        graphics.fill();
+
+        //--------------------------------------------------------------
+
+        graphics.beginPath();
+
+        //centerX, centerY, radius, beginAngle, endAngle
+        graphics.arc(5*gridSize, 12*gridSize, 6*gridSize, Math.PI/4, 3 * Math.PI/4);
+
+        graphics.lineWidth = gridSize/2
+        graphics.strokeStyle = "lightgreen";
+
+        graphics.stroke();
+
+        //--------------------------------------------------------------
+    }
+
+    function drawBasketball()
+    {
+        graphics.beginPath();
+
+        //centerX, centerY, radius, beginAngle, endAngle
+        graphics.arc(15*gridSize, 15*gridSize, 3.5*gridSize, 0, Math.PI*2);
+
+        graphics.lineWidth = gridSize/4;
+        graphics.strokeStyle = "orange"
+
+        graphics.stroke();
+
+        //--------------------------------------------------------------
+
+        graphics.beginPath();
+
+        graphics.moveTo(15*gridSize, 11.5*gridSize);
+
+        graphics.lineTo(15*gridSize, 18.5*gridSize);
+
+        graphics.lineWidth = gridSize/4;
+        graphics.strokeStyle = "orange"
+
+        graphics.stroke();
+
+        //--------------------------------------------------------------
+
+        graphics.beginPath();
+
+        graphics.moveTo(11.5*gridSize, 15*gridSize);
+
+        graphics.lineTo(18.5*gridSize, 15*gridSize);
+
+        graphics.lineWidth = gridSize/4;
+        graphics.strokeStyle = "orange"
+
+        graphics.stroke();
+
+        //--------------------------------------------------------------
+
+        graphics.beginPath();
+
+        //centerX, centerY, radius, beginAngle, endAngle
+        graphics.arc(10*gridSize, 15*gridSize, 4*gridSize, Math.PI/4, 7 * Math.PI/4, true);
+
+        graphics.lineWidth = gridSize/4;
+        graphics.strokeStyle = "orange";
+
+        graphics.stroke();
+
+        //--------------------------------------------------------------
+
+        graphics.beginPath();
+
+        //centerX, centerY, radius, beginAngle, endAngle
+        graphics.arc(20*gridSize, 15*gridSize, 4*gridSize, 3 * Math.PI/4, 5 * Math.PI/4);
+
+        graphics.lineWidth = gridSize/4;
+        graphics.strokeStyle = "orange";
+
+        graphics.stroke();
+
+        //--------------------------------------------------------------
+    }
+
+    function draw() {
+
+        //TODO: uncomment the line below to test the drawLine function
+        //drawLine(100, 20, 300, 300, 2, "red");
+
+        //TODO: comment the line above, then call the drawGrid function here
+        drawGrid();
+
+        //TODO: call the drawVillanovaLogo function here
+        drawVillanovaLogo();
+
+        //TODO: call the drawVillanovaLogo function here
+        drawTomHollandSpidermanLogo();
+
+        //TODO: call the drawVillanovaLogo function here
+        drawSmileyFace()
+
+        //TODO: call the drawVillanovaLogo function here
+        drawBasketball()
+    }
+
+    function main() {
+        canvas = document.getElementById("theCanvas");
+        graphics = canvas.getContext("2d");
+        draw();  // draw something on the canvas
+    }
+</script>
+
+</head>
+<body onload="main()">
+    <canvas id="theCanvas" width="400" height="400" style="border:1px solid grey"></canvas>
+</body>
+</html>
